@@ -10,12 +10,13 @@ if(!$connection){
         die();
     }else{
         $task = $_POST['task'];
-		$date = $_POST['date'];
-        if ( $task && $date ) {
-            $query = "INSERT INTO " . DB_TABLE . "(task,date) VALUES('{$task}','{$date}')";
-            mysqli_query( $connection, $query );
+        $date = $_POST['date'];
+        $query = "INSERT INTO " . DB_TABLE . "(task,date) VALUES('{$task}','{$date}')";
+        if (!mysqli_query( $connection, $query )) {
+            echo("Error description: " . mysqli_error($connection));
+            }else{
             header( 'Location: index.php?added=true' );
-        }
+            }
     }
 }
 ?>  
